@@ -16,10 +16,17 @@ namespace CFStarter
 
         public static T Deserialize<T>(string filename)
         {
-            XmlSerializer xs = new XmlSerializer(typeof(T));
-            using (StreamReader rd = new StreamReader(filename))
+            try
+            { 
+                XmlSerializer xs = new XmlSerializer(typeof(T));
+                using (StreamReader rd = new StreamReader(filename))
+                {
+                    return (T)xs.Deserialize(rd);
+                }
+            }
+            catch (System.Exception)
             {
-                return (T)xs.Deserialize(rd);
+                return default(T);
             }
         }
     }

@@ -45,7 +45,8 @@ namespace CFStarter
                 txtCfPath.Text = ConfigurationManager.AppSettings["cfpath"];
                 
                 var setting = XmlSerializationHelper.Deserialize<ServerConf.Server>(ConfigurationManager.AppSettings["cfpath"] + "\\runtime\\conf\\server.xml");
-                txtAppPath.Text = setting.Service.Engine.Host.Context.DocBase;
+                if (setting != null)
+                    txtAppPath.Text = setting.Service.Engine.Host.Context.DocBase;
                 
             }
         }
